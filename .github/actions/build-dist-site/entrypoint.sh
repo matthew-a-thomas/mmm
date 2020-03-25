@@ -15,6 +15,10 @@ REMOTE_REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSIT
 # Remember, our Docker container is practically pristine at this point
 git clone $REMOTE_REPO repo
 cd repo
+mkdir _site
+cd _site
+git clone $REMOTE_REPO master:gh-pages
+cd ..
 
 # Install all of our dependencies inside the container
 # based on the git repository Gemfile
@@ -28,16 +32,8 @@ echo "Jekyll build done"
 
 # Now lets go to the generated folder by Jekyll
 # and perform everything else from there
-cd _site
-
 echo "☁️ Publishing website"
-
-# Now we init a new git repository inside _site
-# So we can perform a commit
-git init
-git config user.name "${GITHUB_ACTOR}"
-git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-git add .
+cd _site
 # That will create a nice commit message with something like:
 # Github Actions - Fri Sep 6 12:32:22 UTC 2019
 git commit -m "Github Actions - $(date)"
@@ -49,4 +45,5 @@ git push --force $REMOTE_REPO master:gh-pages
 rm -fr .git
 cd ..
 rm -rf repo
+
 echo "🎉 New version deployed 🎊"
