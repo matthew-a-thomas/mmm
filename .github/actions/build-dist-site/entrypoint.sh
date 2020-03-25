@@ -36,6 +36,9 @@ echo "☁️ Publishing website"
 cd _site
 # That will create a nice commit message with something like:
 # Github Actions - Fri Sep 6 12:32:22 UTC 2019
+git config user.name "${GITHUB_ACTOR}"
+git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+git add -A
 git commit -m "Github Actions - $(date)"
 echo "Build branch ready to go. Pushing to Github..."
 # Force push this update to our gh-pages
