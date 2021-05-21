@@ -25,10 +25,24 @@ wide: true
 </style>
 <div class="d-flex flex-row flex-wrap justify-content-center" style="margin: -0.25rem;">
   {% for photo in site.static_files %}
-  {% if photo.path contains "/assets/photos" %}
-  <a class="img-container" href="{{ photo.path }}" target="_blank">
-    <img src="{{ photo.path }}">
-  </a>
-  {% endif %}
+    {% if photo.path contains "/assets/photos" %}
+      {% unless photo.basename contains "thumbnail" %}
+        {% capture thumbnail_basename %}{{ photo.basename }}.thumbnail{% endcapture %}
+        {% assign has_thumbnail = false %}
+        <a class="img-container" href="{{ photo.path }}" target="_blank">
+          {% for thumbnail in site.static_files %}
+            {% unless has_thumbnail %}
+              {% if thumbnail.basename == thumbnail_basename %}
+                {% assign has_thumbnail = true %}
+                <img src="{{ thumbnail.path }}">
+              {% endif %}
+            {% endunless %}
+          {% endfor %}
+          {% unless has_thumbnail %}
+            <img src="{{ photo.path }}">
+          {% endunless %}
+        </a>
+      {% endunless %}
+    {% endif %}
   {% endfor %}
 </div>
