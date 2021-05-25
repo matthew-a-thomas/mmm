@@ -26,9 +26,11 @@ redirect_from:
 </p>
 
 <h1>In their words</h1>
+<div class="row">
 {% for testimonial in site.testimonials %}
-<p>
+<p class="col-lg-6">
   {{ testimonial.content }}<br/>
   &mdash;<i>{{ testimonial.author }}</i>
 </p>
 {% endfor %}
+</div>
