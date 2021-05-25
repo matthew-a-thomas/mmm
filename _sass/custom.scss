@@ -1,5 +1,4 @@
 $primary: #800080;
-$secondary: #ccff66;
 $font-family-base: 'Merriweather', serif;
 $font-weight-normal: 300;
 $headings-font-family: 'Raleway', sans-serif;
@@ -8,16 +7,12 @@ $headings-font-weight: 700;
 b {
   font-weight: 700;
 }
-body {
-  background-color: $secondary;
-}
 h1, h2, h3, h4, h5, h6 {
   text-align: left;
 }
 .home-background-image {
   background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   height: 50vh;
   margin-bottom: -7em;
 }
